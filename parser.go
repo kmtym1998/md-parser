@@ -1,5 +1,9 @@
 package mdparser
 
+import (
+	"strings"
+)
+
 type ParsedMD struct {
 	Raw    string
 	Blocks []BlockContent
@@ -37,6 +41,7 @@ const (
 	BlockContentTypeTable       BlockContentType = "table"
 	BlockContentTypeHorizontal  BlockContentType = "horizontal"
 	BlockContentTypeParagraph   BlockContentType = "paragraph"
+	BlockContentTypeUnknown     BlockContentType = "unknown"
 )
 
 type InlineContentType string
@@ -52,10 +57,29 @@ const (
 	InlineContentTypeText      InlineContentType = "text"
 )
 
-func Parse(b []byte) (ParsedMD, error) {
+func Parse(b []byte) (*ParsedMD, error) {
 	md := ParsedMD{
 		Raw: string(b),
 	}
 
-	return md, nil
+	lines := strings.Split(md.Raw, "\n")
+
+	for _, line := range lines {
+		for _, matcher := range blockContentMatchers() {
+			if t, ok := matcher.match(line); ok {
+
+				md.Blocks = append(md.Blocks, BlockContent{
+					Type: t,
+					Contents: []InlineContent{
+						{
+							Text: line,
+							Type: InlineContentTypeText,
+						},
+					},
+				})
+			}
+		}
+	}
+
+	return &md, nil
 }

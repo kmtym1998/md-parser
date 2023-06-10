@@ -53,5 +53,9 @@ const (
 )
 
 func Parse(b []byte) (ParsedMD, error) {
-	return ParsedMD{}, nil
+	md := ParsedMD{
+		Raw: string(b),
+	}
+
+	return md, nil
 }

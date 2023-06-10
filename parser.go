@@ -41,6 +41,7 @@ const (
 	BlockContentTypeTable       BlockContentType = "table"
 	BlockContentTypeHorizontal  BlockContentType = "horizontal"
 	BlockContentTypeParagraph   BlockContentType = "paragraph"
+	BlockContentTypeEmpty       BlockContentType = "empty"
 	BlockContentTypeUnknown     BlockContentType = "unknown"
 )
 

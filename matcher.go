@@ -14,6 +14,7 @@ func blockContentMatchers() []blockContentMatcher {
 		header4Matcher("#### "),
 		header5Matcher("##### "),
 		header6Matcher("###### "),
+		emptyMatcher(""),
 	}
 }
 
@@ -72,6 +73,16 @@ type header6Matcher string
 func (m header6Matcher) match(content string) (BlockContentType, bool) {
 	if strings.HasPrefix(content, string(m)) {
 		return BlockContentTypeHeader6, true
+	}
+
+	return BlockContentTypeUnknown, false
+}
+
+type emptyMatcher string
+
+func (m emptyMatcher) match(content string) (BlockContentType, bool) {
+	if content == string(m) {
+		return BlockContentTypeEmpty, true
 	}
 
 	return BlockContentTypeUnknown, false

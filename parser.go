@@ -52,6 +52,6 @@ const (
 	InlineContentTypeText      InlineContentType = "text"
 )
 
-func Parse(b []byte) ParsedMD {
-	return ParsedMD{}
+func Parse(b []byte) (ParsedMD, error) {
+	return ParsedMD{}, nil
 }

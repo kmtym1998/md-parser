@@ -33,7 +33,6 @@ func Parse(b []byte) (*ParsedMD, error) {
 	for _, line := range lines {
 		for _, matcher := range blockContentMatchers() {
 			if t, ok := matcher.match(line); ok {
-
 				md.Blocks = append(md.Blocks, BlockContent{
 					Type: t,
 					Contents: []InlineContent{

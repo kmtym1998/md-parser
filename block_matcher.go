@@ -2,26 +2,26 @@ package mdparser
 
 import "strings"
 
-type BlockContentType int
+type BlockContentType string
 
 const (
-	BlockContentTypeHeader1     BlockContentType = iota
-	BlockContentTypeHeader2     BlockContentType = iota
-	BlockContentTypeHeader3     BlockContentType = iota
-	BlockContentTypeHeader4     BlockContentType = iota
-	BlockContentTypeHeader5     BlockContentType = iota
-	BlockContentTypeHeader6     BlockContentType = iota
-	BlockContentTypeQuote       BlockContentType = iota
-	BlockContentTypeCode        BlockContentType = iota
-	BlockContentTypeList        BlockContentType = iota
-	BlockContentTypeOrderedList BlockContentType = iota
-	BlockContentTypeImage       BlockContentType = iota
-	BlockContentTypeLink        BlockContentType = iota
-	BlockContentTypeTable       BlockContentType = iota
-	BlockContentTypeHorizontal  BlockContentType = iota
-	BlockContentTypeParagraph   BlockContentType = iota
-	BlockContentTypeEmpty       BlockContentType = iota
-	BlockContentTypeUnknown     BlockContentType = iota
+	BlockContentTypeHeader1     BlockContentType = "header1"
+	BlockContentTypeHeader2     BlockContentType = "header2"
+	BlockContentTypeHeader3     BlockContentType = "header3"
+	BlockContentTypeHeader4     BlockContentType = "header4"
+	BlockContentTypeHeader5     BlockContentType = "header5"
+	BlockContentTypeHeader6     BlockContentType = "header6"
+	BlockContentTypeQuote       BlockContentType = "quote"
+	BlockContentTypeCode        BlockContentType = "code"
+	BlockContentTypeList        BlockContentType = "list"
+	BlockContentTypeOrderedList BlockContentType = "orderedList"
+	BlockContentTypeImage       BlockContentType = "image"
+	BlockContentTypeLink        BlockContentType = "link"
+	BlockContentTypeTable       BlockContentType = "table"
+	BlockContentTypeHorizontal  BlockContentType = "horizontal"
+	BlockContentTypeParagraph   BlockContentType = "paragraph"
+	BlockContentTypeEmpty       BlockContentType = "empty"
+	BlockContentTypeUnknown     BlockContentType = "unknown"
 )
 
 type blockContentMatcher interface {

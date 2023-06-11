@@ -15,12 +15,12 @@ type BlockContent struct {
 }
 
 type InlineContent struct {
-	Text        string
-	Type        InlineContentType
-	Src         string
-	Alt         string
-	HasChildren bool
-	Children    []InlineContent
+	ContainedTypes []InlineContentType
+	Text           string
+	Src            string
+	Alt            string
+	HasChildren    bool
+	Children       []InlineContent
 }
 
 func Parse(b []byte) (*ParsedMD, error) {
@@ -35,13 +35,13 @@ func Parse(b []byte) (*ParsedMD, error) {
 			if t, ok := matcher.match(line); ok {
 				md.Blocks = append(md.Blocks, BlockContent{
 					Type: t,
-					Contents: []InlineContent{
-						{
-							Text: line,
-							Type: InlineContentTypeText,
-						},
-					},
+					Contents: []InlineContent{{
+						ContainedTypes: []InlineContentType{InlineContentTypeText},
+						Text:           matcher.trimText(line),
+					}},
 				})
+
+				continue
 			}
 		}
 	}

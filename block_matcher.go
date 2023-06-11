@@ -24,21 +24,9 @@ const (
 	BlockContentTypeUnknown     BlockContentType = iota
 )
 
-type InlineContentType int
-
-const (
-	InlineContentTypeBold      InlineContentType = iota
-	InlineContentTypeItalic    InlineContentType = iota
-	InlineContentTypeUnderline InlineContentType = iota
-	InlineContentTypeStrike    InlineContentType = iota
-	InlineContentTypeLink      InlineContentType = iota
-	InlineContentTypeImage     InlineContentType = iota
-	InlineContentTypeCode      InlineContentType = iota
-	InlineContentTypeText      InlineContentType = iota
-)
-
 type blockContentMatcher interface {
 	match(content string) (BlockContentType, bool)
+	trimText(content string) string
 }
 
 func blockContentMatchers() []blockContentMatcher {
@@ -55,6 +43,10 @@ func blockContentMatchers() []blockContentMatcher {
 
 type header1Matcher string
 
+func (m header1Matcher) trimText(content string) string {
+	return strings.TrimPrefix(content, string(m))
+}
+
 func (m header1Matcher) match(content string) (BlockContentType, bool) {
 	if strings.HasPrefix(content, string(m)) {
 		return BlockContentTypeHeader1, true
@@ -64,6 +56,10 @@ func (m header1Matcher) match(content string) (BlockContentType, bool) {
 }
 
 type header2Matcher string
+
+func (m header2Matcher) trimText(content string) string {
+	return strings.TrimPrefix(content, string(m))
+}
 
 func (m header2Matcher) match(content string) (BlockContentType, bool) {
 	if strings.HasPrefix(content, string(m)) {
@@ -75,6 +71,10 @@ func (m header2Matcher) match(content string) (BlockContentType, bool) {
 
 type header3Matcher string
 
+func (m header3Matcher) trimText(content string) string {
+	return strings.TrimPrefix(content, string(m))
+}
+
 func (m header3Matcher) match(content string) (BlockContentType, bool) {
 	if strings.HasPrefix(content, string(m)) {
 		return BlockContentTypeHeader3, true
@@ -84,6 +84,10 @@ func (m header3Matcher) match(content string) (BlockContentType, bool) {
 }
 
 type header4Matcher string
+
+func (m header4Matcher) trimText(content string) string {
+	return strings.TrimPrefix(content, string(m))
+}
 
 func (m header4Matcher) match(content string) (BlockContentType, bool) {
 	if strings.HasPrefix(content, string(m)) {
@@ -95,6 +99,10 @@ func (m header4Matcher) match(content string) (BlockContentType, bool) {
 
 type header5Matcher string
 
+func (m header5Matcher) trimText(content string) string {
+	return strings.TrimPrefix(content, string(m))
+}
+
 func (m header5Matcher) match(content string) (BlockContentType, bool) {
 	if strings.HasPrefix(content, string(m)) {
 		return BlockContentTypeHeader5, true
@@ -105,6 +113,10 @@ func (m header5Matcher) match(content string) (BlockContentType, bool) {
 
 type header6Matcher string
 
+func (m header6Matcher) trimText(content string) string {
+	return strings.TrimPrefix(content, string(m))
+}
+
 func (m header6Matcher) match(content string) (BlockContentType, bool) {
 	if strings.HasPrefix(content, string(m)) {
 		return BlockContentTypeHeader6, true
@@ -114,6 +126,10 @@ func (m header6Matcher) match(content string) (BlockContentType, bool) {
 }
 
 type emptyMatcher string
+
+func (m emptyMatcher) trimText(content string) string {
+	return ""
+}
 
 func (m emptyMatcher) match(content string) (BlockContentType, bool) {
 	if content == string(m) {

@@ -26,7 +26,7 @@ func GetMokuji(mdContent []byte) (string, error) {
 		return "", err
 	}
 
-	headingBlocks := lo.Filter(md.Blocks, func(b parser.BlockContent, _ int) bool {
+	var headingBlocks BlockList = lo.Filter(md.Blocks, func(b parser.BlockContent, _ int) bool {
 		return lo.Contains([]parser.BlockContentType{
 			parser.BlockContentTypeHeader1,
 			parser.BlockContentTypeHeader2,
@@ -37,7 +37,7 @@ func GetMokuji(mdContent []byte) (string, error) {
 		}, b.Type)
 	})
 
-	nestedHeadingList, err := getNestableHeadingList(headingBlocks)
+	nestedHeadingList, err := headingBlocks.toNestableHeadingList()
 	if err != nil {
 		return "", err
 	}
@@ -53,17 +53,17 @@ func GetMokuji(mdContent []byte) (string, error) {
 	return "", nil
 }
 
-func getNestableHeadingList(headingBlocks BlockList) (nestableHeadingList NestableHeadingList, err error) {
-	for _, hb := range headingBlocks {
-		if len(hb.Contents) == 0 {
+func (l BlockList) toNestableHeadingList() (nestableHeadingList NestableHeadingList, err error) {
+	for _, headingBlock := range l {
+		if len(headingBlock.Contents) == 0 {
 			return nil, errors.New("heading block has no contents")
 		}
 
-		if len(hb.Contents[0].ContainedTypes) == 0 {
+		if len(headingBlock.Contents[0].ContainedTypes) == 0 {
 			return nil, errors.New("heading block has no contained types")
 		}
 
-		nestableHeadingList = nestableHeadingList.append(hb)
+		nestableHeadingList = nestableHeadingList.append(headingBlock)
 	}
 
 	return nestableHeadingList, nil

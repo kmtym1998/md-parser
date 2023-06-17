@@ -1,11 +1,26 @@
 package mdparser
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/samber/lo"
+)
 
 type BlockContentType string
 
 func (t BlockContentType) String() string {
 	return string(t)
+}
+
+func (t BlockContentType) IsHeader() bool {
+	return lo.Contains([]BlockContentType{
+		BlockContentTypeHeader1,
+		BlockContentTypeHeader2,
+		BlockContentTypeHeader3,
+		BlockContentTypeHeader4,
+		BlockContentTypeHeader5,
+		BlockContentTypeHeader6,
+	}, t)
 }
 
 const (

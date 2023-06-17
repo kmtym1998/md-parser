@@ -2,6 +2,10 @@ package mdparser
 
 type InlineContentType string
 
+func (t InlineContentType) String() string {
+	return string(t)
+}
+
 const (
 	InlineContentTypeBold      InlineContentType = "bold"
 	InlineContentTypeItalic    InlineContentType = "italic"

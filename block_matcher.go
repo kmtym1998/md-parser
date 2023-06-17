@@ -4,6 +4,10 @@ import "strings"
 
 type BlockContentType string
 
+func (t BlockContentType) String() string {
+	return string(t)
+}
+
 const (
 	BlockContentTypeHeader1     BlockContentType = "header1"
 	BlockContentTypeHeader2     BlockContentType = "header2"

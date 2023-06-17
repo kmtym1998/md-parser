@@ -1,7 +1,6 @@
 package mokuji
 
 import (
-	"encoding/json"
 	"errors"
 	"strings"
 
@@ -13,28 +12,13 @@ type BlockList []parser.BlockContent
 type NestableHeaderList []NestableHeader
 
 type NestableHeader struct {
+	Depth    int
 	Text     string
 	Type     parser.BlockContentType
 	Children NestableHeaderList
 }
 
-func GetMokuji(mdContent []byte) (string, error) {
-	md, err := parser.Parse(mdContent)
-	if err != nil {
-		return "", err
-	}
-
-	nestedHeaderList, err := BlockList(md.Blocks).toNestedHeaderList()
-	if err != nil {
-		return "", err
-	}
-
-	json.Marshal(nestedHeaderList)
-
-	return "", nil
-}
-
-func (l BlockList) toNestedHeaderList() (nestableHeaderList NestableHeaderList, err error) {
+func (l BlockList) ToNestedHeaderList() (nestableHeaderList NestableHeaderList, err error) {
 	for _, block := range l {
 		if !strings.HasPrefix(block.Type.String(), "header") {
 			continue
@@ -48,17 +32,18 @@ func (l BlockList) toNestedHeaderList() (nestableHeaderList NestableHeaderList, 
 			return nil, errors.New("header block has no contained types")
 		}
 
-		nestableHeaderList = nestableHeaderList.append(block)
+		nestableHeaderList = nestableHeaderList.append(block, 0)
 	}
 
 	return nestableHeaderList, nil
 }
 
-func (l NestableHeaderList) append(block parser.BlockContent) NestableHeaderList {
+func (l NestableHeaderList) append(block parser.BlockContent, depth int) NestableHeaderList {
 	if len(l) == 0 {
 		l = append(l, NestableHeader{
-			Text: block.Contents[0].Text,
-			Type: block.Type,
+			Text:  block.Contents[0].Text,
+			Type:  block.Type,
+			Depth: depth,
 		})
 
 		return l
@@ -68,12 +53,13 @@ func (l NestableHeaderList) append(block parser.BlockContent) NestableHeaderList
 
 	if block.Type <= lastParentHeader.Type {
 		return append(l, NestableHeader{
-			Text: block.Contents[0].Text,
-			Type: block.Type,
+			Text:  block.Contents[0].Text,
+			Type:  block.Type,
+			Depth: lastParentHeader.Depth,
 		})
 	}
 
-	lastParentHeader.Children = lastParentHeader.Children.append(block)
+	lastParentHeader.Children = lastParentHeader.Children.append(block, depth+1)
 
 	return l
 }

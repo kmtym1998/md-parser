@@ -10,14 +10,6 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetMokuji(t *testing.T) {
-	mdContent := []byte("# h1\n## h2\n### h3\n#### h4\n##### h5\n###### h6\n")
-	_, err := GetMokuji(mdContent)
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
 func TestToNestableHeaderList(t *testing.T) {
 	t.Run("1.md", func(t *testing.T) {
 		mdContent, err := os.ReadFile("test/samples/1.md")
@@ -30,7 +22,7 @@ func TestToNestableHeaderList(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		nestedHeadingList, err := BlockList(md.Blocks).toNestedHeaderList()
+		nestedHeadingList, err := BlockList(md.Blocks).ToNestedHeaderList()
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -54,7 +46,7 @@ func TestToNestableHeaderList(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		nestedHeadingList, err := BlockList(md.Blocks).toNestedHeaderList()
+		nestedHeadingList, err := BlockList(md.Blocks).ToNestedHeaderList()
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -78,7 +70,7 @@ func TestToNestableHeaderList(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		nestedHeadingList, err := BlockList(md.Blocks).toNestedHeaderList()
+		nestedHeadingList, err := BlockList(md.Blocks).ToNestedHeaderList()
 		if err != nil {
 			t.Fatal(err)
 		}

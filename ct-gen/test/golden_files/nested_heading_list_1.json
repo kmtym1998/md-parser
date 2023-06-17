@@ -1,18 +1,22 @@
 [
   {
+    "Depth": 0,
     "Text": "h1 だよ",
     "Type": "header1",
     "Children": [
       {
+        "Depth": 1,
         "Text": "h3 だよ",
         "Type": "header3",
         "Children": [
           {
+            "Depth": 2,
             "Text": "h6 だよ",
             "Type": "header6",
             "Children": null
           },
           {
+            "Depth": 2,
             "Text": "h6 だよ",
             "Type": "header6",
             "Children": null
@@ -20,15 +24,18 @@
         ]
       },
       {
+        "Depth": 1,
         "Text": "h3 だよ",
         "Type": "header3",
         "Children": [
           {
+            "Depth": 2,
             "Text": "h5 だよ",
             "Type": "header5",
             "Children": null
           },
           {
+            "Depth": 2,
             "Text": "h5 だよ",
             "Type": "header5",
             "Children": null

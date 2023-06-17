@@ -1,13 +1,16 @@
 [
   {
+    "Depth": 0,
     "Text": "h1 だよ",
     "Type": "header1",
     "Children": [
       {
+        "Depth": 1,
         "Text": "h2 だよ",
         "Type": "header2",
         "Children": [
           {
+            "Depth": 2,
             "Text": "h3 だよ",
             "Type": "header3",
             "Children": null
@@ -15,24 +18,29 @@
         ]
       },
       {
+        "Depth": 1,
         "Text": "h2 だよ",
         "Type": "header2",
         "Children": [
           {
+            "Depth": 2,
             "Text": "h3 だよ",
             "Type": "header3",
             "Children": [
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": null
               },
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": null
               },
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": null
@@ -40,15 +48,18 @@
             ]
           },
           {
+            "Depth": 2,
             "Text": "h3 だよ",
             "Type": "header3",
             "Children": [
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": null
               },
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": null
@@ -56,18 +67,22 @@
             ]
           },
           {
+            "Depth": 2,
             "Text": "h3 だよ",
             "Type": "header3",
             "Children": [
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": [
                   {
+                    "Depth": 4,
                     "Text": "h5 だよ",
                     "Type": "header5",
                     "Children": [
                       {
+                        "Depth": 5,
                         "Text": "h6 だよ",
                         "Type": "header6",
                         "Children": null
@@ -79,15 +94,18 @@
             ]
           },
           {
+            "Depth": 2,
             "Text": "h3 だよ",
             "Type": "header3",
             "Children": [
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": null
               },
               {
+                "Depth": 3,
                 "Text": "h4 だよ",
                 "Type": "header4",
                 "Children": null
@@ -99,19 +117,23 @@
     ]
   },
   {
+    "Depth": 0,
     "Text": "h1 だよ",
     "Type": "header1",
     "Children": [
       {
+        "Depth": 1,
         "Text": "h2 だよ",
         "Type": "header2",
         "Children": [
           {
+            "Depth": 2,
             "Text": "h4 だよ",
             "Type": "header4",
             "Children": null
           },
           {
+            "Depth": 2,
             "Text": "h4 だよ",
             "Type": "header4",
             "Children": null

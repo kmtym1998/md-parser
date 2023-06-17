@@ -1,0 +1,40 @@
+[
+  {
+    "Text": "h1 だよ",
+    "Type": "header1",
+    "Children": [
+      {
+        "Text": "h3 だよ",
+        "Type": "header3",
+        "Children": [
+          {
+            "Text": "h6 だよ",
+            "Type": "header6",
+            "Children": null
+          },
+          {
+            "Text": "h6 だよ",
+            "Type": "header6",
+            "Children": null
+          }
+        ]
+      },
+      {
+        "Text": "h3 だよ",
+        "Type": "header3",
+        "Children": [
+          {
+            "Text": "h5 だよ",
+            "Type": "header5",
+            "Children": null
+          },
+          {
+            "Text": "h5 だよ",
+            "Type": "header5",
+            "Children": null
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -86,3 +86,7 @@ func (l NestableHeaderList) ToContentTable(indent string) (result string) {
 
 	return
 }
+
+func (l NestableHeaderList) ToContentTableWithLink(indent string) (result string) {
+	panic("not implemented") // TODO
+}

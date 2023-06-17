@@ -135,3 +135,91 @@ func assertOnlyHeaderIsIncluded(t *testing.T, nestableHeader NestableHeader) {
 		assertOnlyHeaderIsIncluded(t, child)
 	}
 }
+
+func TestToContentTable(t *testing.T) {
+	t.Run("1.md", func(t *testing.T) {
+		nestedHeaderList := arrangeToContentTable(t, "test/samples/1.md")
+
+		actual := nestedHeaderList.ToContentTable("  ")
+
+		expected := `- h1 だよ
+  - h3 だよ
+    - h6 だよ
+    - h6 だよ
+  - h3 だよ
+    - h5 だよ
+    - h5 だよ
+`
+
+		assert.Equal(t, expected, actual)
+	})
+
+	t.Run("2.md", func(t *testing.T) {
+		nestedHeaderList := arrangeToContentTable(t, "test/samples/2.md")
+
+		actual := nestedHeaderList.ToContentTable("  ")
+
+		expected := `- h1 だよ
+  - h2 だよ
+    - h3 だよ
+  - h2 だよ
+    - h3 だよ
+      - h4 だよ
+      - h4 だよ
+      - h4 だよ
+    - h3 だよ
+      - h4 だよ
+      - h4 だよ
+    - h3 だよ
+      - h4 だよ
+        - h5 だよ
+          - h6 だよ
+    - h3 だよ
+      - h4 だよ
+      - h4 だよ
+- h1 だよ
+  - h2 だよ
+    - h4 だよ
+    - h4 だよ
+`
+
+		assert.Equal(t, expected, actual)
+	})
+
+	t.Run("3.md", func(t *testing.T) {
+		nestedHeaderList := arrangeToContentTable(t, "test/samples/3.md")
+
+		actual := nestedHeaderList.ToContentTable("  ")
+
+		expected := `- はじめに
+- 画像の圧縮処理をするコードサンプル
+  - jpeg の圧縮
+  - png の圧縮
+- まとめ
+- 参考
+`
+
+		assert.Equal(t, expected, actual)
+	})
+}
+
+func arrangeToContentTable(t *testing.T, sampleMDFilePath string) NestableHeaderList {
+	t.Helper()
+
+	b, err := os.ReadFile(sampleMDFilePath)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	md, err := parser.Parse(b)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	nestedHeaderList, err := BlockList(md.Blocks).ToNestedHeaderList()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return nestedHeaderList
+}

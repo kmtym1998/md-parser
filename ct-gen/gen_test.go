@@ -22,6 +22,10 @@ func TestGetMokuji(t *testing.T) {
 ### h3だよ
 #### h4だよ
 #### h4だよ
+# h1だよ
+## h2だよ
+#### h4だよ
+#### h4だよ
 `)
 	_, err := GetMokuji(mdContent)
 	if err != nil {

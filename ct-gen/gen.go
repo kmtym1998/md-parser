@@ -2,6 +2,7 @@ package mokuji
 
 import (
 	"errors"
+	"fmt"
 	"strings"
 
 	parser "github.com/kmtym1998/md-parser"
@@ -62,4 +63,26 @@ func (l NestableHeaderList) append(block parser.BlockContent, depth int) Nestabl
 	lastParentHeader.Children = lastParentHeader.Children.append(block, depth+1)
 
 	return l
+}
+
+func (l NestableHeaderList) ToContentTable(indent string) (result string) {
+	for _, block := range l {
+		result += fmt.Sprintf(
+			"%s- %s\n",
+			strings.Repeat(indent, block.Depth),
+			block.Text,
+		)
+
+		for _, child := range block.Children {
+			result += fmt.Sprintf(
+				"%s- %s\n",
+				strings.Repeat(indent, child.Depth),
+				child.Text,
+			)
+
+			result += child.Children.ToContentTable(indent)
+		}
+	}
+
+	return
 }

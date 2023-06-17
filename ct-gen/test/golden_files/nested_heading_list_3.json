@@ -1,0 +1,33 @@
+[
+  {
+    "Text": "はじめに",
+    "Type": "header2",
+    "Children": null
+  },
+  {
+    "Text": "画像の圧縮処理をするコードサンプル",
+    "Type": "header2",
+    "Children": [
+      {
+        "Text": "jpeg の圧縮",
+        "Type": "header3",
+        "Children": null
+      },
+      {
+        "Text": "png の圧縮",
+        "Type": "header3",
+        "Children": null
+      }
+    ]
+  },
+  {
+    "Text": "まとめ",
+    "Type": "header2",
+    "Children": null
+  },
+  {
+    "Text": "参考",
+    "Type": "header2",
+    "Children": null
+  }
+]

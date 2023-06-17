@@ -66,6 +66,30 @@ func TestToNestableHeaderList(t *testing.T) {
 			"test/golden_files/nested_heading_list_2.json",
 		)
 	})
+
+	t.Run("3.md", func(t *testing.T) {
+		mdContent, err := os.ReadFile("test/samples/3.md")
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		md, err := parser.Parse(mdContent)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		nestedHeadingList, err := BlockList(md.Blocks).toNestedHeaderList()
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		assertToNestableHeaderList(
+			t,
+			nestedHeadingList,
+			"test/samples/3.md",
+			"test/golden_files/nested_heading_list_3.json",
+		)
+	})
 }
 
 func assertToNestableHeaderList(

@@ -1,34 +1,77 @@
 [
-  { "Text": "h1だよ", "Type": "header1", "Children": null },
-  { "Text": "h2だよ", "Type": "header2", "Children": null },
   {
-    "Text": "h3だよ",
-    "Type": "header3",
-    "Children": [{ "Text": "h2だよ", "Type": "header2", "Children": null }]
-  },
-  { "Text": "h3だよ", "Type": "header3", "Children": null },
-  { "Text": "h4だよ", "Type": "header4", "Children": null },
-  { "Text": "h4だよ", "Type": "header4", "Children": null },
-  {
-    "Text": "h4だよ",
-    "Type": "header4",
-    "Children": [{ "Text": "h3だよ", "Type": "header3", "Children": null }]
-  },
-  { "Text": "h4だよ", "Type": "header4", "Children": null },
-  {
-    "Text": "h4だよ",
-    "Type": "header4",
-    "Children": [{ "Text": "h3だよ", "Type": "header3", "Children": null }]
-  },
-  { "Text": "h4だよ", "Type": "header4", "Children": null },
-  { "Text": "h5だよ", "Type": "header5", "Children": null },
-  {
-    "Text": "h6だよ",
-    "Type": "header6",
+    "Text": "h1だよ",
+    "Type": "header1",
     "Children": [
-      { "Text": "h3だよ", "Type": "header3", "Children": null },
-      { "Text": "h4だよ", "Type": "header4", "Children": null },
-      { "Text": "h4だよ", "Type": "header4", "Children": null }
+      {
+        "Text": "h2だよ",
+        "Type": "header2",
+        "Children": [{ "Text": "h3だよ", "Type": "header3", "Children": null }]
+      },
+      {
+        "Text": "h2だよ",
+        "Type": "header2",
+        "Children": [
+          {
+            "Text": "h3だよ",
+            "Type": "header3",
+            "Children": [
+              { "Text": "h4だよ", "Type": "header4", "Children": null },
+              { "Text": "h4だよ", "Type": "header4", "Children": null },
+              { "Text": "h4だよ", "Type": "header4", "Children": null }
+            ]
+          },
+          {
+            "Text": "h3だよ",
+            "Type": "header3",
+            "Children": [
+              { "Text": "h4だよ", "Type": "header4", "Children": null },
+              { "Text": "h4だよ", "Type": "header4", "Children": null }
+            ]
+          },
+          {
+            "Text": "h3だよ",
+            "Type": "header3",
+            "Children": [
+              {
+                "Text": "h4だよ",
+                "Type": "header4",
+                "Children": [
+                  {
+                    "Text": "h5だよ",
+                    "Type": "header5",
+                    "Children": [
+                      { "Text": "h6だよ", "Type": "header6", "Children": null }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "Text": "h3だよ",
+            "Type": "header3",
+            "Children": [
+              { "Text": "h4だよ", "Type": "header4", "Children": null },
+              { "Text": "h4だよ", "Type": "header4", "Children": null }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Text": "h1だよ",
+    "Type": "header1",
+    "Children": [
+      {
+        "Text": "h2だよ",
+        "Type": "header2",
+        "Children": [
+          { "Text": "h4だよ", "Type": "header4", "Children": null },
+          { "Text": "h4だよ", "Type": "header4", "Children": null }
+        ]
+      }
     ]
   }
 ]

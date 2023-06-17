@@ -15,10 +15,9 @@ type BlockList []parser.BlockContent
 type NestableHeadingList []NestableHeading
 
 type NestableHeading struct {
-	Level    int
 	Text     string
 	Type     parser.BlockContentType
-	Children []NestableHeading
+	Children NestableHeadingList
 }
 
 func GetMokuji(mdContent []byte) (string, error) {
@@ -64,29 +63,32 @@ func getNestableHeadingList(headingBlocks BlockList) (nestableHeadingList Nestab
 			return nil, errors.New("heading block has no contained types")
 		}
 
-		if len(nestableHeadingList) == 0 {
-			nestableHeadingList = append(nestableHeadingList, NestableHeading{
-				Text: hb.Contents[0].Text,
-				Type: hb.Type,
-			})
-			continue
-		}
-
-		lastHeading := nestableHeadingList[len(nestableHeadingList)-1]
-
-		if hb.Type < lastHeading.Type {
-			nestableHeadingList[len(nestableHeadingList)-1].Children = append(lastHeading.Children, NestableHeading{
-				Text: hb.Contents[0].Text,
-				Type: hb.Type,
-			})
-			continue
-		}
-
-		nestableHeadingList = append(nestableHeadingList, NestableHeading{
-			Text: hb.Contents[0].Text,
-			Type: hb.Type,
-		})
+		nestableHeadingList = nestableHeadingList.append(hb)
 	}
 
 	return nestableHeadingList, nil
+}
+
+func (l NestableHeadingList) append(block parser.BlockContent) NestableHeadingList {
+	if len(l) == 0 {
+		l = append(l, NestableHeading{
+			Text: block.Contents[0].Text,
+			Type: block.Type,
+		})
+
+		return l
+	}
+
+	lastParentHeading := &l[len(l)-1]
+
+	if block.Type <= lastParentHeading.Type {
+		return append(l, NestableHeading{
+			Text: block.Contents[0].Text,
+			Type: block.Type,
+		})
+	}
+
+	lastParentHeading.Children = lastParentHeading.Children.append(block)
+
+	return l
 }

@@ -1,3 +1,4 @@
 .vscode
 tmp
 go.work*
+.DS_Store

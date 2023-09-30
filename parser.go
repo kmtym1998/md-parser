@@ -15,11 +15,11 @@ type BlockContent struct {
 }
 
 type InlineContent struct {
-	ContainedTypes []InlineContentType
+	// FIXME: Deprecated
+	ContainedTypes []InlineContentType // deprecated
 	Text           string
 	Src            string
 	Alt            string
-	HasChildren    bool
 	Children       []InlineContent
 }
 
@@ -32,12 +32,12 @@ func Parse(b []byte) (*ParsedMD, error) {
 
 	for _, line := range lines {
 		for _, matcher := range blockContentMatchers() {
-			if t, ok := matcher.match(line); ok {
+			if blockType, ok := matcher.match(line); ok {
 				md.Blocks = append(md.Blocks, BlockContent{
-					Type: t,
+					Type: blockType,
 					Contents: []InlineContent{{
-						ContainedTypes: []InlineContentType{InlineContentTypeText},
-						Text:           matcher.trimText(line),
+						Text:     matcher.trimText(line),
+						Children: parseInlineContent(matcher.trimText(line)),
 					}},
 				})
 
@@ -47,4 +47,23 @@ func Parse(b []byte) (*ParsedMD, error) {
 	}
 
 	return &md, nil
+}
+
+func parseInlineContent(line string) []InlineContent {
+	var contents []InlineContent
+
+	for _, matcher := range inlineContentMatchers() {
+		if inlineType := matcher.match(line); inlineType != InlineContentTypeUnknown {
+			txt := matcher.trimText(line)
+			contents = append(contents, InlineContent{
+				ContainedTypes: []InlineContentType{InlineContentTypeText},
+				Text:           txt,
+				Src:            matcher.trimSrc(line),
+				Alt:            matcher.trimAlt(line),
+				Children:       parseInlineContent(txt),
+			})
+		}
+	}
+
+	return contents
 }

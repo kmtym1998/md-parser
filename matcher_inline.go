@@ -19,23 +19,34 @@ const (
 )
 
 type inlineContentMatcher interface {
-	match(content string) *InlineSig
+	match(content string) InlineContentType
+	trimText(content string) string
+	trimSrc(content string) string
+	trimAlt(content string) string
 }
 
 type InlineSig struct {
-	Start string
-	End   string
-	Type  InlineContentType
+	regExp string
+	Type   InlineContentType
 }
 
 func inlineContentMatchers() []inlineContentMatcher {
 	return []inlineContentMatcher{
-		boldMatcher(InlineSig{}),
+		boldMatcher{regExp: `^\*\*.*\*\*$`, Type: InlineContentTypeBold},
 	}
 }
 
 type boldMatcher InlineSig
 
-func (m boldMatcher) match(content string) *InlineSig {
-	return nil
+func (m boldMatcher) match(content string) InlineContentType {
+	return "unknown"
+}
+func (m boldMatcher) trimText(content string) string {
+	return ""
+}
+func (m boldMatcher) trimSrc(content string) string {
+	return ""
+}
+func (m boldMatcher) trimAlt(content string) string {
+	return ""
 }

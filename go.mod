@@ -6,6 +6,7 @@ require (
 	github.com/cockroachdb/errors v1.9.1
 	github.com/samber/lo v1.38.1
 	github.com/stretchr/testify v1.8.4
+	github.com/yuin/goldmark v1.3.5
 )
 
 require (

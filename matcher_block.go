@@ -44,6 +44,7 @@ const (
 )
 
 type blockContentMatcher interface {
+	// FIXME: bool を返さずに unknown を返すようにする
 	match(content string) (BlockContentType, bool)
 	trimText(content string) string
 }
@@ -56,6 +57,7 @@ func blockContentMatchers() []blockContentMatcher {
 		header4Matcher("#### "),
 		header5Matcher("##### "),
 		header6Matcher("###### "),
+		quoteMatcher("> "),
 		emptyMatcher(""),
 	}
 }
@@ -153,6 +155,20 @@ func (m emptyMatcher) trimText(content string) string {
 func (m emptyMatcher) match(content string) (BlockContentType, bool) {
 	if content == string(m) {
 		return BlockContentTypeEmpty, true
+	}
+
+	return BlockContentTypeUnknown, false
+}
+
+type quoteMatcher string
+
+func (m quoteMatcher) trimText(content string) string {
+	return strings.TrimPrefix(content, string(m))
+}
+
+func (m quoteMatcher) match(content string) (BlockContentType, bool) {
+	if strings.HasPrefix(content, string(m)) {
+		return BlockContentTypeQuote, true
 	}
 
 	return BlockContentTypeUnknown, false
